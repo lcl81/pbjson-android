@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package MideaPb;
+
+message FaceList{
+    repeated int32 face_list = 1;
+}
+
+message QueryResponse{
+    message Image {
+        string image_name = 1;
+    }
+
+    message Person {
+        string person_name = 1;
+        repeated Image image_list = 2;
+    }
+
+    message Group {
+        string group_name = 1;
+        repeated Person person_list = 2;
+    }
+
+    string act = 1;
+    repeated Group list = 2;
+}
+
+message DetectResult {
+    message ImgProperty {
+        double luminance = 1;
+    }
+
+    message FaceResult {
+        int32 person_id =1;
+        int32 left = 2;
+        int32 top = 3;
+        int32 right = 4;
+        int32 bottom = 5;
+        int32 type = 6;
+        double confidence = 7;
+        double liveness =8;
+    }
+
+    ImgProperty img_property = 1;
+    repeated FaceResult face_result = 2;
+}
